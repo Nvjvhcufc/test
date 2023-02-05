@@ -8,7 +8,7 @@ jobs:
       run: |
         Invoke-webRequest https://dl.google.com/edgedl/chrome-remote-desktop/chromeremotedesktophost.msi -Outfile chromeremotedesktophost.msi
         start chromeremotedesktophost.msi
-        cd..
-        cd..
         C:
+        cd..
+        cd..
         & "${Env:PROGRAMFILES(X86)}\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe" --code="4/0AWtgzh5RHmm7lsnzm-gwif0sm_CMeGns-PUJIXJQkr9XW3QgXyrqz9v1_0s_1O_kzJC6kg" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$Env:COMPUTERNAME --pin=12345678
