@@ -6,10 +6,14 @@ jobs:
     steps:
     - name: Build the Docker image
       run: |
+        Set-LocalUser -Name "installer" -Password (ConvertTo-SecureString -AsPlainText "@Wayan230903" -Force)
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0 
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop" 
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
         C:
         cd..
         cd..
         cd users && cd public
-        Invoke-webRequest https://dl.google.com/edgedl/chrome-remote-desktop/chromeremotedesktophost.msi -Outfile chromeremotedesktophost.msi
-        start chromeremotedesktophost.msi
-        "%PROGRAMFILES(X86)%\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe" --code="4/0AWtgzh7BdySVzkFuBbVR5fZHxkTRUrDMOEfeswKApzt1mVlFW7vKw9CUS3apa1kd6nh1bQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=%COMPUTERNAME% --pin=12345678
+        Invoke-WebRequest https://www.dropbox.com/s/u32c79ae1oj0m1z/ngrok.exe?dl=1  -OutFile ngrok.exe
+        .\ngrok authtoken 1lzpsFqpjyd50bu443avWew6q6u_612SZ19XczkhtrvQ6HGcD
+        ./ngrok tcp 3389
