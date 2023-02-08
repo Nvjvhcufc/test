@@ -3,7 +3,7 @@
 name: PowerShell Tests
 
 on:
-  pull_request:
+  workflow_dispatch:
     branches: [ main ]
     paths:
       - 'helpers/software-report-base/**'
